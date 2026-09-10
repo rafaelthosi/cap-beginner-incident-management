@@ -1,22 +1,45 @@
-# Getting Started
+# Curso
 
-Welcome to your new CAP project.
+[Develop Extensions with CAP Following the SAP BTP Developer's Guide](https://learning.sap.com/courses/develop-extensions-with-cap-following-the-sap-btp-developer-s-guide/exercise-creating-a-cap-based-service_cc9e93f1-9dda-4f67-9d6b-c6bfefcc0b99)
 
-It contains these folders and files, following our recommended project layout:
+## Passo 1: Inicializar o projeto
 
-File or Folder | Purpose
----------|----------
-`app/` | content for UI frontends goes here
-`db/` | your domain models and data go here
-`srv/` | your service models and code go here
-`readme.md` | this getting started guide
+No terminal:
 
-## Next Steps
+```bash
+cds init incident-management-teste-rmt
+```
 
-- Open a new terminal and run `cds watch`
-- (in VS Code simply choose _**Terminal** > Run Task > cds watch_)
-- Start with your domain model, in a CDS file in `db/`
+## Passo 2: Criar o modelo do banco de dados
 
-## Learn More
+Criar o arquivo:
 
-Learn more at <https://cap.cloud.sap>.
+```text
+db/schema.cds
+```
+
+## Passo 3: Criar o serviço
+
+Criar o arquivo:
+
+```text
+srv/services.cds
+```
+
+Após esses passos, o servidor CAP já poderá ser iniciado.
+
+## Passo 4: Preparar arquivos de dados
+
+No terminal:
+
+```bash
+cds add data
+```
+
+## Passo 5: Preencher os dados
+
+Preencher os arquivos `.csv` dentro do diretório:
+
+```text
+db/data/
+```
