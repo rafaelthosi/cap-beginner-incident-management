@@ -1,4 +1,4 @@
-# Curso
+# Curso (Iniciante)
 
 [Develop Extensions with CAP Following the SAP BTP Developer's Guide](https://learning.sap.com/courses/develop-extensions-with-cap-following-the-sap-btp-developer-s-guide/exercise-creating-a-cap-based-service_cc9e93f1-9dda-4f67-9d6b-c6bfefcc0b99)
 
@@ -37,7 +37,6 @@ cds add data
 ```
 
 ## Passo 5: Preencher os dados
-
 Preencher os arquivos `.csv` dentro do diretório:
 
 ```text
