@@ -1,0 +1,35 @@
+{
+  "name": "incident-management-teste-rmt",
+  "version": "1.0.0",
+  "description": "[Develop Extensions with CAP Following the SAP BTP Developer's Guide](https://learning.sap.com/courses/develop-extensions-with-cap-following-the-sap-btp-developer-s-guide/exercise-creating-a-cap-based-service_cc9e93f1-9dda-4f67-9d6b-c6bfefcc0b99)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "cds watch",
+    "watch-incidents": "cds watch --open ns.incidents/index.html?sap-ui-xx-viewCache=false --livereload false"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rafaelthosi/cap-beginner-incident-management.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/rafaelthosi/cap-beginner-incident-management/issues"
+  },
+  "homepage": "https://github.com/rafaelthosi/cap-beginner-incident-management#readme",
+  "dependencies": {
+    "@sap/cds": "^10.1.0"
+  },
+  "workspaces": [
+    "app/*"
+  ],
+  "devDependencies": {
+    "cds-plugin-ui5": "^0.17.0"
+  },
+  "sapux": [
+    "app/incidents"
+  ]
+}
