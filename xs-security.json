@@ -1,34 +1,33 @@
-
 {
-   "xsappname": "incident-management",
-   "tenant-mode": "dedicated",
-   "scopes": [
-     {
-       "name": "$XSAPPNAME.IncidentViewer",
-       "description": "IncidentViewer"
-     },
-     {
-       "name": "$XSAPPNAME.IncidentManager",
-       "description": "IncidentManager"
-     }
+ "xsappname": "incident-management",
+ "tenant-mode": "dedicated",
+ "scopes": [
+  {
+   "name": "$XSAPPNAME.support",
+   "description": "support"
+  },
+  {
+   "name": "$XSAPPNAME.admin",
+   "description": "admin"
+  }
+ ],
+ "attributes": [],
+ "role-templates": [
+  {
+   "name": "IncidentViewer",
+   "description": "generated",
+   "scope-references": [
+    "$XSAPPNAME.support"
    ],
-   "attributes": [],
-   "role-templates": [
-     {
-       "name": "IncidentViewer",
-       "description": "generated",
-       "scope-references": [
-         "$XSAPPNAME.IncidentViewer"
-       ],
-       "attribute-references": []
-     },
-     {
-       "name": "IncidentManager",
-       "description": "generated",
-       "scope-references": [
-         "$XSAPPNAME.IncidentManager"
-        ],
-       "attribute-references": []
-     }
-   ]
- }
+   "attribute-references": []
+  },
+  {
+   "name": "IncidentManager",
+   "description": "generated",
+   "scope-references": [
+    "$XSAPPNAME.admin"
+   ],
+   "attribute-references": []
+  }
+ ]
+}

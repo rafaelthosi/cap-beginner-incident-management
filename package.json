@@ -21,7 +21,8 @@
   },
   "homepage": "https://github.com/rafaelthosi/cap-beginner-incident-management#readme",
   "dependencies": {
-    "@sap/cds": "^10.1.0"
+    "@sap/cds": "^10.1.0",
+    "@sap/xssec": "^4"
   },
   "workspaces": [
     "app/*"
@@ -40,16 +41,25 @@
           "users": {
             "incident.support@tester.sap.com": {
               "password": "initial",
-              "roles": ["support"]
+              "roles": [
+                "support"
+              ]
             },
             "alice": {
-              "roles": ["support"]
+              "roles": [
+                "support"
+              ]
             },
             "bob": {
-              "roles": ["support"]
+              "roles": [
+                "support"
+              ]
             }
           }
         }
+      },
+      "[production]": {
+        "auth": "xsuaa"
       }
     }
   }
