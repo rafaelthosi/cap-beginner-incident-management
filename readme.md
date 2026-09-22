@@ -42,3 +42,45 @@ Preencher os arquivos `.csv` dentro do diretório:
 ```text
 db/data/
 ```
+
+# Complementos:
+
+## Importar serviço externo
+### Instalar dependências para conectividade
+No terminal:
+```bash
+npm add @sap-cloud-sdk/http-client@3.x @sap-cloud-sdk/util@3.x @sap-cloud-sdk/connectivity@3.x @sap-cloud-sdk/resilience@3.x
+```
+* Se atentar nas versões das bibliotecas.
+### Importação
+Pegar o arquivo edmx (metadata) do serviço, importar na raiz do projeto e executar no terminal:
+```bash
+cds import NOME_ARQUIVO.edmx --as cds
+```
+Isto moverá o arquivo .edmx para srv/external, criando junto dele o equivalente com extensão .cds.
+
+## Adicionar XSUAA
+No terminal:
+```bash
+cds add xsuaa --for production
+```
+
+## Adicionar HanaCloud
+No terminal:
+```bash
+cds add xsuaa --for production
+```
+
+Além de adicionar a configuração no package, irá criar o arquivo xs-security.json baseado nas roles/scopes declarados nas annotaions dos CDS Models criados.
+### Se houver mudança nas annotations:
+No terminal:
+```bash
+cds compile --to xsuaa
+```
+Isto atualizará o xs-security.json.
+
+## Adicionar configuração de deploy utilizando Multitarget Application (MTA)
+No terminal:
+```bash
+cds add mta
+```

@@ -1,0 +1,67 @@
+_schema-version: 3.3.0
+ID: incident-management-teste-rmt
+version: 1.0.0
+description: "[Develop Extensions with CAP Following the SAP BTP Developer&#39;s
+  Guide](https:&#x2F;&#x2F;learning.sap.com&#x2F;courses&#x2F;develop-extensions-with-cap-following-the-sap-btp-developer-s-guide&#x2F;exercise-creat\
+  ing-a-cap-based-service_cc9e93f1-9dda-4f67-9d6b-c6bfefcc0b99)"
+parameters:
+  enable-parallel-deployments: true
+build-parameters:
+  before-all:
+    - builder: custom
+      commands:
+        - npm ci
+        - npx cds build --production
+modules:
+  - name: incident-management-teste-rmt-srv
+    type: nodejs
+    path: gen/srv
+    parameters:
+      instances: 1
+      buildpack: nodejs_buildpack
+    build-parameters:
+      builder: npm-ci
+    provides:
+      - name: srv-api # required by consumers of CAP services (e.g. approuter)
+        properties:
+          srv-url: ${default-url}
+    requires:
+      - name: incident-management-teste-rmt-auth
+      - name: incident-management-teste-rmt-db
+
+  - name: incident-management-teste-rmt-db-deployer
+    type: hdb
+    path: gen/db
+    parameters:
+      buildpack: nodejs_buildpack
+    requires:
+      - name: incident-management-teste-rmt-db
+
+resources:
+  - name: incident-management-teste-rmt-auth
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: xsuaa
+      service-plan: application
+      path: ./xs-security.json
+      config:
+        xsappname: incident-management-teste-rmt-${org}-${space}
+        tenant-mode: dedicated
+        oauth2-configuration:
+          credential-types:
+            - "binding-secret"
+            - "x509"
+        role-collections:
+          - name: 'support (incident-management-teste-rmt ${org}-${space})'
+            description: 'generated'
+            role-template-references:
+              - '$XSAPPNAME.support'
+          - name: 'admin (incident-management-teste-rmt ${org}-${space})'
+            description: 'generated'
+            role-template-references:
+              - '$XSAPPNAME.admin'
+  - name: incident-management-teste-rmt-db
+    type: com.sap.xs.hdi-container
+    parameters:
+      service: hana
+      service-plan: hdi-shared
