@@ -4,7 +4,7 @@
   "description": "[Develop Extensions with CAP Following the SAP BTP Developer's Guide](https://learning.sap.com/courses/develop-extensions-with-cap-following-the-sap-btp-developer-s-guide/exercise-creating-a-cap-based-service_cc9e93f1-9dda-4f67-9d6b-c6bfefcc0b99)",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "cd ./testing && mocha",
     "start": "cds watch",
     "watch-incidents": "cds watch --open ns.incidents/index.html?sap-ui-xx-viewCache=false --livereload false"
   },
@@ -28,7 +28,9 @@
     "app/*"
   ],
   "devDependencies": {
-    "cds-plugin-ui5": "^0.17.0"
+    "cds-plugin-ui5": "^0.17.0",
+    "chai": "^6.2.2",
+    "mocha": "^12.0.2"
   },
   "sapux": [
     "app/incidents"
