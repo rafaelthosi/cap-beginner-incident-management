@@ -1,8 +1,10 @@
-const cds = require('@sap/cds')
+const cds = require('@sap/cds/lib')
 const test = cds.test(__dirname + '/..', '--with-mocks')
 const { GET, POST, DELETE, PATCH, expect } = test
 
-test.defaults.auth = { username: 'alice', password: '' }
+test.defaults.auth = { username: 'incident.support@tester.sap.com', password: 'initial' }
+
+jest.setTimeout(11111)
 
 describe('Test The GET Endpoints', () => {
   it('Should check Processor Service', async () => {
@@ -27,17 +29,18 @@ describe('Test The GET Endpoints', () => {
 describe('Draft Choreography APIs', () => {
   let draftId, incidentId
 
-  it('Create an incident ', async () => {
+  it('Create an incident & check Urgency code as H using custom logic', async () => {
     const { status, data } = await POST(`/odata/v4/processor/Incidents`, {
       title: 'Urgent attention required !',
       status_code: 'N'
     })
     draftId = data.ID
     expect(status).to.equal(201)
+    expect(data.urgency_code).to.eql('H')
     expect(data.IsActiveEntity).to.equal(false)
   })
 
-  it('+ Activate the draft & check Urgency code as H using custom logic', async () => {
+  it('+ Activate the draft', async () => {
     const { status, data } = await POST(
       `/odata/v4/processor/Incidents(ID=${draftId},IsActiveEntity=false)/ProcessorService.draftActivate`
     )
