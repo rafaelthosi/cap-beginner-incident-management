@@ -84,3 +84,15 @@ No terminal:
 ```bash
 cds add mta
 ```
+
+## Executar Build de MTA
+No terminal:
+```bash
+cds build --production
+```
+
+## Adicionar Approuter
+No terminal:
+```bash
+cds add approuter
+```
