@@ -6,12 +6,14 @@ description: "[Develop Extensions with CAP Following the SAP BTP Developer&#39;s
   ing-a-cap-based-service_cc9e93f1-9dda-4f67-9d6b-c6bfefcc0b99)"
 parameters:
   enable-parallel-deployments: true
+  deploy_mode: html5-repo
 build-parameters:
   before-all:
     - builder: custom
       commands:
         - npm ci
         - npx cds build --production
+        - mkdir -p resources
 modules:
   - name: incident-management-teste-rmt-srv
     type: nodejs
@@ -51,11 +53,43 @@ modules:
           url: ~{srv-url}
           forwardAuthToken: true
       - name: incident-management-teste-rmt-auth
+      - name: incident-management-teste-rmt-html5-runtime
     provides:
       - name: app-api
         properties:
           app-protocol: ${protocol}
           app-uri: ${default-uri}
+
+  - name: incident-management-teste-rmt-app-deployer
+    type: com.sap.application.content
+    path: gen
+    build-parameters:
+      build-result: app/
+      requires:
+        - name: incidentmanagementtestermtincidents
+          artifacts:
+            - incidents.zip
+          target-path: app/
+    requires:
+      - name: incident-management-teste-rmt-auth
+      - name: srv-api
+      - name: incident-management-teste-rmt-html5-repo-host
+        parameters:
+          content-target: true
+          config:
+            HTML5Runtime_enabled: true
+
+  - name: incidentmanagementtestermtincidents
+    type: html5
+    path: app/incidents
+    build-parameters:
+      build-result: dist
+      builder: custom
+      commands:
+        - npm ci
+        - npm run build
+      supported-platforms:
+        []
 
 resources:
   - name: incident-management-teste-rmt-auth
@@ -89,3 +123,14 @@ resources:
     parameters:
       service: hana
       service-plan: hdi-shared
+
+  - name: incident-management-teste-rmt-html5-repo-host
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: html5-apps-repo
+      service-plan: app-host
+  - name: incident-management-teste-rmt-html5-runtime
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: html5-apps-repo
+      service-plan: app-runtime

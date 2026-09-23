@@ -96,3 +96,15 @@ No terminal:
 ```bash
 cds add approuter
 ```
+
+## Adicionar html5-repo (config para MTA)
+No terminal:
+```bash
+cds add html5-repo
+```
+
+## Adicionar html5-repo e portal (config para MTA)
+No terminal:
+```bash
+cds add portal
+```
