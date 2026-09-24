@@ -29,15 +29,15 @@ modules:
           srv-url: ${default-url}
     requires:
       - name: incident-management-teste-rmt-auth
-      - name: incident-management-teste-rmt-db
+      - name: incident-management-teste-rmt-hdicontainer
 
-  - name: incident-management-teste-rmt-db-deployer
+  - name: incident-management-teste-rmt-hdicontainer-deployer
     type: hdb
     path: gen/db
     parameters:
       buildpack: nodejs_buildpack
     requires:
-      - name: incident-management-teste-rmt-db
+      - name: incident-management-teste-rmt-hdicontainer
   - name: incident-management-teste-rmt
     type: approuter.nodejs
     path: app/router
@@ -118,12 +118,11 @@ resources:
               - '$XSAPPNAME.admin'
     requires:
       - name: app-api
-  - name: incident-management-teste-rmt-db
+  - name: incident-management-teste-rmt-hdicontainer
     type: com.sap.xs.hdi-container
     parameters:
       service: hana
       service-plan: hdi-shared
-
   - name: incident-management-teste-rmt-html5-repo-host
     type: org.cloudfoundry.managed-service
     parameters:

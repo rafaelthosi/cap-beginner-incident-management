@@ -108,3 +108,15 @@ No terminal:
 ```bash
 cds add portal
 ```
+
+# Deploy
+No terminal:
+```bash
+mbt build
+cf login
+cf deploy mta_archives/<arquivo>.mtar
+```
+Para verificar os serviços, executar:
+```bash
+cf services
+```
